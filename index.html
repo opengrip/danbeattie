@@ -156,7 +156,7 @@
     max-width: 1000px; margin: 0 auto; padding: 0 48px;
   }
   .section-title {
-    font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.15);
+    font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.5);
     text-transform: uppercase; letter-spacing: 2px; margin-bottom: 32px;
   }
 
@@ -165,8 +165,11 @@
     position: relative;
     background: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cfilter%20id%3D%22n%22%3E%0A%20%20%20%20%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.65%22%20numOctaves%3D%223%22%20stitchTiles%3D%22stitch%22/%3E%0A%20%20%3C/filter%3E%0A%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url%28%23n%29%22%20opacity%3D%220.045%22/%3E%0A%3C/svg%3E) repeat, #080808;
     max-width: none;
-    padding: 64px 0;
+    padding: 0;
     margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    min-height: 400px;
   }
   
   .music-section .section-inner {
@@ -175,6 +178,7 @@
     max-width: 1000px;
     margin: 0 auto;
     padding: 0 48px;
+    width: 100%;
   }
   .music-grid {
     display: grid; grid-template-columns: 200px 1fr 1fr;
@@ -406,6 +410,7 @@
 </div>
 
 <div class="section" id="tour" style="background:#000">
+  <div class="section-inner">
   <div class="section-title">Tour</div>
   <!-- TOUR LIST START -->
   <div class="tour-item">
@@ -473,45 +478,45 @@
     
   </div>
 <!-- TOUR LIST END -->
+  </div>
 </div>
 
 <!-- MUSIC SECTION -->
 <div class="section music-section" id="music">
   <div class="section-inner">
   <div class="section-title">Music</div>
-  <div class="music-grid">
-    <div class="album-art">
-      <img src="https://i.scdn.co/image/ab67616d0000e1a3fc476f9c632a5dd5b5f2b8f6" alt="Call You A Country Boy">
-    </div>
-    <div class="music-info">
-      <h3>Call You A Country Boy</h3>
-      <p class="album-sub">The Martin Boys &mdash; Debut Album</p>
+        <div class="music-grid">
+        <div class="album-art">
+          <img src="https://i.scdn.co/image/ab67616d0000e1a3fc476f9c632a5dd5b5f2b8f6" alt="Call You A Country Boy">
+        </div>
+        <div class="music-info">
+          <h3>Call You A Country Boy</h3>
+          <p class="album-sub">The Martin Boys &mdash; Debut Album</p>
 
-      <!-- Countdown -->
-      <div class="countdown" id="countdown">
-        <div class="countdown-item">
-          <div class="countdown-num" id="days">--</div>
-          <div class="countdown-label">Days</div>
+          <!-- Countdown -->
+          <div class="countdown" id="countdown">
+            <div class="countdown-item">
+              <div class="countdown-num" id="days">--</div>
+              <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-num" id="hours">--</div>
+              <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-num" id="minutes">--</div>
+              <div class="countdown-label">Min</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-num" id="seconds">--</div>
+              <div class="countdown-label">Sec</div>
+            </div>
+          </div>
         </div>
-        <div class="countdown-item">
-          <div class="countdown-num" id="hours">--</div>
-          <div class="countdown-label">Hours</div>
-        </div>
-        <div class="countdown-item">
-          <div class="countdown-num" id="minutes">--</div>
-          <div class="countdown-label">Min</div>
-        </div>
-        <div class="countdown-item">
-          <div class="countdown-num" id="seconds">--</div>
-          <div class="countdown-label">Sec</div>
-        </div>
-      </div>
-    </div>
-    </div>
-    <div class="music-links">
-      <p style="font-size:14px;color:rgba(255,255,255,0.35);margin-bottom:16px;">Listen to The Martin Boys everywhere.</p>
+        <div class="music-links">
+          <p style="font-size:14px;color:rgba(255,255,255,0.35);margin-bottom:16px;">Listen to The Martin Boys everywhere.</p>
 
-      <div class="platform-icons">
+          <div class="platform-icons"><div class="platform-icons">
         <a href="https://open.spotify.com/artist/0Jjl71AwTHhQlvhSeugY8k" target="_blank" title="Spotify">
           <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" fill="currentColor"/></svg></a>
         <a href="https://music.apple.com/ca/artist/the-martin-boys/1587536026" target="_blank" title="Apple Music">
@@ -523,13 +528,15 @@
         <a href="https://www.pandora.com/artist/the-martin-boys/ARb74Vrr4vrr2VX" target="_blank" title="Pandora">
           <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M1.882 0v24H8.32a1.085 1.085 0 001.085-1.085v-4.61h1.612c7.88 0 11.103-4.442 11.103-9.636C22.119 2.257 17.247 0 12.662 0H1.882Z"/></svg></a>
       </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 
-
 <div class="section" id="connect" style="background:#000">
+  <div class="section-inner">
   <div class="section-title">Connect</div>
   <div class="connect-links">
     <a href="https://instagram.com/whoisdanbeattie" target="_blank">Instagram</a>
@@ -538,6 +545,7 @@
     <a href="https://www.tiktok.com/@whoisdanbeattie" target="_blank">TikTok</a>
     <a href="https://linktr.ee/themartinboys" target="_blank">The Martin Boys</a>
   </div>
+</div>
 </div>
 
 <footer>
