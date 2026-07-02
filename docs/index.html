@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dan Beattie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #000;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #000; }
+  ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 3px; }
+
+  /* === NAV === */
+  nav {
+    position: fixed; top: 0; left: 0; width: 100%;
+    padding: 12px 40px;
+    display: flex; align-items: center;
+    z-index: 100;
+    background: rgba(0,0,0,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  nav .logo {
+    font-weight: 300; font-size: 20px; color: #fff;
+    text-decoration: none; letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+  nav .logo b { font-weight: 700; letter-spacing: -1px; }
+  nav .logo i {
+    font-style: normal; font-weight: 200;
+    color: rgba(255,255,255,0.2); margin: 0 2px;
+  }
+
+  nav .links { display: flex; gap: 28px; margin-left: auto; }
+  nav .links a {
+    font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.5);
+    text-decoration: none; transition: color 0.2s; letter-spacing: 0.3px;
+  }
+  nav .links a:hover { color: #fff; }
+
+  nav .right { display: flex; align-items: center; gap: 16px; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column; gap: 4px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 20px; height: 2px;
+    background: rgba(255,255,255,0.6); border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 48px; left: 0; width: 100%;
+    background: rgba(0,0,0,0.95);
+    backdrop-filter: blur(20px);
+    padding: 24px;
+    flex-direction: column; gap: 16px;
+    z-index: 99;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 18px; font-weight: 500; color: rgba(255,255,255,0.6);
+    text-decoration: none; padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  /* === HERO === */
+  .hero {
+    width: 100%; height: 100vh;
+    position: relative; 
+  }
+  .hero-inner { width: 100%; height: 100%; position: relative; }
+
+  .hero-sidebar {
+    position: absolute; left: 0; top: 0;
+    width: 64px; height: 100%;
+    z-index: 20;
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 20px;
+    background: rgba(0,0,0,0.4);
+  }
+  .hero-sidebar a {
+    display: flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none; transition: all 0.2s;
+  }
+  .hero-sidebar a svg { width: 100%; height: 100%; fill: currentColor; }
+  .hero-sidebar a:hover { color: #fff; }
+
+  .hero-slides {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
+  }
+  .hero-slide {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0; transition: opacity 1s ease;
+  }
+  .hero-slide.active { opacity: 1; }
+  .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-slide[data-index="0"] img { object-position: center 0%; }
+  .hero-slide[data-index="1"] img { object-position: center 0%; }
+  .hero-slide[data-index="2"] img { object-position: center 0%; }
+
+  .carousel-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    z-index: 10;
+    background: none; border: none;
+    color: rgba(255,255,255,0.35);
+    font-size: 32px; cursor: pointer; padding: 10px;
+    transition: color 0.2s;
+  }
+  .carousel-btn:hover { color: rgba(255,255,255,0.5); }
+  .carousel-prev { left: 100px; }
+  .carousel-next { right: 36px; }
+
+  .hero-gradient {
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 40%;
+    background: linear-gradient(0deg, rgba(0,0,0,0.95) 20%, transparent 100%);
+    z-index: 1;
+  }
+
+  .carousel-dots {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    z-index: 10; display: flex; gap: 6px;
+  }
+  .carousel-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: none; cursor: pointer; transition: all 0.2s;
+  }
+  .carousel-dot.active { background: rgba(255,255,255,0.5); }
+
+  /* === SECTIONS === */
+  .section {
+    max-width: none;
+    padding: 64px 0;
+    background: #000;
+    scroll-margin-top: 64px;
+  }
+  .section-inner {
+    max-width: 1000px; margin: 0 auto; padding: 0 48px;
+  }
+  .section-title {
+    font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.5);
+    text-transform: uppercase; letter-spacing: 2px; margin-bottom: 32px;
+  }
+
+  /* === BIO === */
+  .bio-wrap {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center;
+  }
+  .bio-text p {
+    font-size: 15px; line-height: 1.7;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 16px;
+  }
+  .bio-text p:last-child { margin-bottom: 0; }
+  .bio-text strong { color: rgba(255,255,255,0.75); font-weight: 500; }
+  .bio-image {
+    width: 100%; border-radius: 8px;
+    overflow: hidden;
+  }
+  .bio-image img {
+    width: 100%; display: block;
+  }
+
+  /* === MUSIC SECTION === */
+  .music-section {
+    position: relative;
+    background: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22200%22%20height%3D%22200%22%3E%0A%20%20%3Cfilter%20id%3D%22n%22%3E%0A%20%20%20%20%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.65%22%20numOctaves%3D%223%22%20stitchTiles%3D%22stitch%22/%3E%0A%20%20%3C/filter%3E%0A%20%20%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20filter%3D%22url%28%23n%29%22%20opacity%3D%220.045%22/%3E%0A%3C/svg%3E) repeat, #080808;
+    max-width: none;
+    padding: 0;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    min-height: 400px;
+  }
+  
+  .music-section .section-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 48px;
+    width: 100%;
+  }
+  .music-grid {
+    display: grid; grid-template-columns: 200px 1fr 1fr;
+    gap: 40px; align-items: start;
+  }
+
+  .album-art {
+    width: 200px; height: 200px;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+  .album-art img {
+    width: 100%; height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .music-info h3 {
+    font-size: 22px; font-weight: 600; color: #fff;
+    margin-bottom: 4px; letter-spacing: -0.5px;
+  }
+  .music-info .album-sub {
+    font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.25);
+    margin-bottom: 16px;
+  }
+
+  .music-info .countdown {
+    display: flex; gap: 12px; margin-bottom: 20px;
+  }
+  .music-info .countdown-item { text-align: center; }
+  .music-info .countdown-num {
+    font-size: 28px; font-weight: 700; color: #fff;
+    line-height: 1; letter-spacing: -1px;
+  }
+  .music-info .countdown-label {
+    font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.2);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px;
+  }
+
+  .platform-icons {
+    display: flex; gap: 10px;
+    margin-top: 12px;
+  }
+  .platform-icons a {
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 50%;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .platform-icons a:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.15);
+  }
+  .platform-icons a svg {
+    width: 22px; height: 22px;
+    fill: currentColor;
+    color: rgba(255,255,255,0.3);
+    transition: color 0.2s;
+  }
+  .music-links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .platform-icons a:hover svg { color: #fff; }
+
+  /* === TOUR === */
+  .tour-item {
+    display: grid; grid-template-columns: 100px 1fr 120px;
+    gap: 16px; padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    align-items: center;
+  }
+  .tour-date { font-size: 15px; font-weight: 600; color: #fff; }
+  .tour-venue { font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.55); }
+  .tour-location { font-size: 12px; color: rgba(255,255,255,0.25); }
+  .tour-status {
+    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;
+    color: #2a6; margin-top: 2px;
+  }
+  .tour-tickets {
+    font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.4);
+    text-decoration: none; text-align: center;
+    padding: 6px 14px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 100px;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+  .tour-tickets:hover { border-color: rgba(255,255,255,0.3); color: #fff; }
+  .tour-item:hover { background: rgba(255,255,255,0.01); }
+  .tour-item { transition: background 0.2s; }
+
+  /* === CONNECT === */
+  .connect-links { display: flex; gap: 8px; flex-wrap: wrap; }
+  .connect-links a {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 100px;
+    font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.4);
+    text-decoration: none; transition: all 0.2s;
+  }
+  .connect-links a:hover { border-color: rgba(255,255,255,0.25); color: #fff; }
+  .connect-links a svg { width: 16px; height: 16px; fill: currentColor; }
+
+  /* === FOOTER === */
+  footer {
+    text-align: center; padding: 40px 0;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    background: #000;
+  }
+  footer .footer-inner {
+    max-width: 1000px; margin: 0 auto; padding: 0 48px;
+  }
+  footer p { font-size: 12px; color: rgba(255,255,255,0.15); }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 768px) {
+    .platform-icons { flex-wrap: wrap; }
+    .hero-sidebar { display: none; }
+    .mobile-social { display: flex !important; justify-content: center; gap: 24px; padding: 20px 24px 12px; }
+    .mobile-social a { display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.35); font-size: 11px; text-decoration: none; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; transition: color 0.2s; }
+    .mobile-social a:hover { color: #fff; }
+    .mobile-social svg { width: 20px; height: 20px; fill: currentColor; }
+
+    .music-grid { grid-template-columns: 1fr; gap: 24px; }
+    .album-art { width: 160px; height: 160px; margin: 0 auto; }
+
+    .bio-wrap { grid-template-columns: 1fr; gap: 32px; }
+
+    .section { padding: 60px 0; }
+    .section-inner { padding: 0 24px; }
+    .tour-item { grid-template-columns: 80px 1fr 80px; gap: 6px; padding: 14px 0; }
+    .tour-location { font-size: 12px; }
+    nav .links { display: none; }
+    .hamburger { display: flex; }
+    nav { padding: 16px 24px; }
+    nav .right { margin-left: auto; }
+    .carousel-btn { font-size: 24px; }
+    .carousel-prev { left: 60px; }
+    .carousel-next { right: 60px; }
+    .carousel-dots { bottom: 60px; }
+  }
+  .platform-icons a {
+    padding: 8px 14px;
+    font-size: 11px;
+  }
+  .platform-icons a svg {
+    width: 16px;
+    height: 16px;
+  }
+  .mobile-social { display: none; }
+</style>
+<meta name="description" content="Dan Beattie — Music Director and bassist for The Martin Boys. On tour summer '26.">
+<meta property="og:title" content="Dan Beattie — Music Director &amp; Bassist">
+<meta property="og:description" content="Music Director and bassist for The Martin Boys. Canada's Got Talent 2025 finalists. On tour summer '26.">
+<meta property="og:image" content="https://whoisdanbeattie.com/images/img_5.jpg">
+<meta property="og:url" content="https://whoisdanbeattie.com">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo"><b>DAN</b><i>//</i>BEATTIE</a>
+  <div class="links">
+    <a href="#bio">Bio</a>
+    <a href="#tour">Tour</a>
+    <a href="#music">Music</a>
+    <a href="#connect">Connect</a>
+  </div>
+  <div class="right">
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#bio" onclick="toggleMenu()">Bio</a>
+  <a href="#tour" onclick="toggleMenu()">Tour</a>
+  <a href="#music" onclick="toggleMenu()">Music</a>
+  <a href="#connect" onclick="toggleMenu()">Connect</a>
+  <a href="https://instagram.com/whoisdanbeattie" target="_blank">Instagram</a>
+  <a href="https://x.com/whoisdanbeattie" target="_blank">X / Twitter</a>
+  <a href="https://www.facebook.com/whoisdanbeattie" target="_blank">Facebook</a>
+  <a href="https://www.tiktok.com/@whoisdanbeattie" target="_blank">TikTok</a>
+</div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-sidebar">
+      <a href="https://instagram.com/whoisdanbeattie" target="_blank" title="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a>
+      <a href="https://www.tiktok.com/@whoisdanbeattie" target="_blank" title="TikTok">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.6 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.27 0 .53.04.78.1V9.06a6.38 6.38 0 0 0-.78-.05A6.34 6.34 0 0 0 3.22 15.3a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.76a8.29 8.29 0 0 0 4.24 1.37V6.82a3.13 3.13 0 0 1-.55-.13z" fill="currentColor"/></svg></a>
+      <a href="https://x.com/whoisdanbeattie" target="_blank" title="X">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg></a>
+      <a href="https://www.facebook.com/whoisdanbeattie" target="_blank" title="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="currentColor"/></svg></a>
+    </div>
+
+    <div class="hero-slides">
+      <div class="hero-slide active" data-index="0"><img src="images/img_5.jpg" alt="Dan Beattie bassist black shirt aviators red bass guitar"></div>
+      <div class="hero-slide" data-index="1"><img src="images/img_6.jpg" alt="Dan Beattie bassist black shirt aviators red bass guitar"></div>
+      <div class="hero-slide" data-index="2"><img src="images/img_2.jpg" alt="Dan Beattie bassist black shirt aviators red bass guitar"></div>
+    </div>
+
+    <button class="carousel-btn carousel-prev" onclick="prevSlide()">&#10094;</button>
+    <button class="carousel-btn carousel-next" onclick="nextSlide()">&#10095;</button>
+
+    <div class="carousel-dots">
+      <button class="carousel-dot active" onclick="goToSlide(0)"></button>
+      <button class="carousel-dot" onclick="goToSlide(1)"></button>
+      <button class="carousel-dot" onclick="goToSlide(2)"></button>
+    </div>
+
+    <div class="hero-gradient"></div>
+  </div>
+</div>
+
+<div class="mobile-social">
+  <a href="https://instagram.com/whoisdanbeattie" target="_blank">
+    <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg> IG
+  </a>
+  <a href="https://www.tiktok.com/@whoisdanbeattie" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.6 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.27 0 .53.04.78.1V9.06a6.38 6.38 0 0 0-.78-.05A6.34 6.34 0 0 0 3.22 15.3a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.76a8.29 8.29 0 0 0 4.24 1.37V6.82a3.13 3.13 0 0 1-.55-.13z" fill="currentColor"/></svg> TikTok
+  </a>
+  <a href="https://x.com/whoisdanbeattie" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg> X
+  </a>
+  <a href="https://www.facebook.com/whoisdanbeattie" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="currentColor"/></svg> FB
+  </a>
+</div>
+
+<!-- BIO SECTION -->
+<div class="section" id="bio">
+  <div class="section-inner">
+    <div class="section-title">Bio</div>
+    <div class="bio-wrap">
+      <div class="bio-text">
+        <p>Dan Beattie is the Music Director and bassist for <strong>The Martin Boys</strong>, the country duo who made waves as finalists on <strong>Canada's Got Talent 2025</strong> and are currently crossing North America on tour in support of their debut album.</p>
+
+        <p>Before The Martin Boys, Dan was the bassist for <strong>Eleven Past One</strong>, a Canadian pop-rock band whose single "The World Is Ours" charted nationally and earned them radio play across the country. That chapter included national tours and a deep education in what it takes to build a show from the ground up.</p>
+
+        <p>With over 20 years of experience, Dan brings a seasoned approach to every stage he plays. From arena-sized festival bills to intimate club rooms, the work is the same — hold down the pocket and make the band sound bigger than it is.</p>
+
+        <p>On tour, summer '26.</p>
+      </div>
+      <div class="bio-image">
+        <img src="images/img_14.jpg" alt="Dan Beattie bassist black shirt aviators red bass guitar">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOUR SECTION -->
+<div class="section" id="tour" style="background:#000">
+  <div class="section-inner">
+  <div class="section-title">Tour</div>
+  <!-- TOUR LIST START -->
+  <div class="tour-item">
+    <div><div class="tour-date">Jul. 2, 2026</div><div class="tour-status">Up next</div></div>
+    <div>
+      <div class="tour-venue">18TH ANNUAL HOLLYWOOD JAMBOREE</div>
+      <div class="tour-location">BELLEVILLE, ON</div>
+    </div>
+    <a href="https://www.bandsintown.com/t/107359840?affil_code=&app_id=6c96175f419d9630331d545ae437d211&came_from=700&ticket_id=2005177479&utm_campaign=ticket_tktpp&utm_medium=web&utm_source=widget" class="tour-tickets" target="_blank">Tickets</a>
+  </div>
+  <div class="tour-item">
+    <div><div class="tour-date">Jul. 4, 2026</div></div>
+    <div>
+      <div class="tour-venue">HONKY TONK SUMMER JAM</div>
+      <div class="tour-location">BRACEBRIDGE, ON</div>
+    </div>
+    <a href="https://www.bandsintown.com/t/108553826?affil_code=&app_id=6c96175f419d9630331d545ae437d211&came_from=700&ticket_id=2042191045&utm_campaign=ticket_tktpp&utm_medium=web&utm_source=widget" class="tour-tickets" target="_blank">Tickets</a>
+  </div>
+  <div class="tour-item">
+    <div><div class="tour-date">Jul. 9, 2026</div></div>
+    <div>
+      <div class="tour-venue">THE MARTIN BOYS @ RANCHMANS</div>
+      <div class="tour-location">CALGARY, AB</div>
+    </div>
+    <a href="https://www.bandsintown.com/t/108285594?affil_code=&app_id=6c96175f419d9630331d545ae437d211&came_from=700&ticket_id=2033875853&utm_campaign=ticket_tktpp&utm_medium=web&utm_source=widget" class="tour-tickets" target="_blank">Tickets</a>
+  </div>
+  <div class="tour-item">
+    <div><div class="tour-date">Jul. 11, 2026</div></div>
+    <div>
+      <div class="tour-venue">CAVENDISH BEACH MUSIC FESTIVAL - COLLIDING TIDES KITCHEN STAGE</div>
+      <div class="tour-location">NEW GLASGOW, PE</div>
+    </div>
+    <a href="https://www.bandsintown.com/t/107933349?affil_code=&app_id=6c96175f419d9630331d545ae437d211&came_from=700&ticket_id=2022956258&utm_campaign=ticket_tktpp&utm_medium=web&utm_source=widget" class="tour-tickets" target="_blank">Tickets</a>
+  </div>
+  <div class="tour-item">
+    <div><div class="tour-date">Jul. 17, 2026</div></div>
+    <div>
+      <div class="tour-venue">BATHURST HOSPITALITY DAYS</div>
+      <div class="tour-location">BATHURST, NB</div>
+    </div>
+    
+  </div>
+  <div class="tour-item">
+    <div><div class="tour-date">Jul. 30, 2026</div></div>
+    <div>
+      <div class="tour-venue">THE MARTIN BOYS @ AREA 506</div>
+      <div class="tour-location">SAINT JOHN, NB</div>
+    </div>
+    <a href="https://www.bandsintown.com/t/107933267?affil_code=&app_id=6c96175f419d9630331d545ae437d211&came_from=700&ticket_id=2022953716&utm_campaign=ticket_tktpp&utm_medium=web&utm_source=widget" class="tour-tickets" target="_blank">Tickets</a>
+  </div>
+  <div class="tour-item">
+    <div><div class="tour-date">Aug. 29, 2026</div></div>
+    <div>
+      <div class="tour-venue">FESTIVAL COUNTRY LOTBINIÈRE</div>
+      <div class="tour-location">SAINT-AGAPIT, QC</div>
+    </div>
+    <a href="https://www.bandsintown.com/t/108285667?affil_code=&app_id=6c96175f419d9630331d545ae437d211&came_from=700&ticket_id=2033878116&utm_campaign=ticket_tktpp&utm_medium=web&utm_source=widget" class="tour-tickets" target="_blank">Tickets</a>
+  </div>
+  <div class="tour-item">
+    <div><div class="tour-date">Sep. 5, 2026</div></div>
+    <div>
+      <div class="tour-venue">TWEED STAMPEDE</div>
+      <div class="tour-location">TWEED, ON</div>
+    </div>
+    
+  </div>
+<!-- TOUR LIST END -->
+  </div>
+</div>
+
+<!-- MUSIC SECTION -->
+<div class="section music-section" id="music">
+  <div class="section-inner">
+  <div class="section-title">Music</div>
+        <div class="music-grid">
+        <div class="album-art">
+          <img src="https://i.scdn.co/image/ab67616d0000e1a3fc476f9c632a5dd5b5f2b8f6" alt="Call You A Country Boy">
+        </div>
+        <div class="music-info">
+          <h3>Call You A Country Boy</h3>
+          <p class="album-sub">The Martin Boys — Debut Album</p>
+
+          <!-- Countdown -->
+          <div class="countdown" id="countdown">
+            <div class="countdown-item">
+              <div class="countdown-num" id="days">--</div>
+              <div class="countdown-label">Days</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-num" id="hours">--</div>
+              <div class="countdown-label">Hours</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-num" id="minutes">--</div>
+              <div class="countdown-label">Min</div>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-num" id="seconds">--</div>
+              <div class="countdown-label">Sec</div>
+            </div>
+          </div>
+        </div>
+        <div class="music-links">
+          <p style="font-size:14px;color:rgba(255,255,255,0.35);margin-bottom:16px;">Listen to The Martin Boys everywhere.</p>
+
+                    <div class="platform-icons">
+        <a href="https://open.spotify.com/artist/0Jjl71AwTHhQlvhSeugY8k" target="_blank" title="Spotify">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+        <a href="https://music.apple.com/ca/artist/the-martin-boys/1587536026" target="_blank" title="Apple Music">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg></a>
+                        <a href="https://music.amazon.com/music/player/artists/B09H5B84JL/the-martin-boys" target="_blank" title="Amazon Music">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"><path d="M257.2 162.7c-48.7 1.8-169.5 15.5-169.5 117.5 0 109.5 138.3 114 183.5 43.2 6.5 10.2 35.4 37.5 45.3 46.8l56.8-56S341 288.9 341 261.4V114.3C341 89 316.5 32 228.7 32 140.7 32 94 87 94 136.3l73.5 6.8c16.3-49.5 54.2-49.5 54.2-49.5 40.7-.1 35.5 29.8 35.5 69.1zm0 86.8c0 80-84.2 68-84.2 17.2 0-47.2 50.5-56.7 84.2-57.8v40.6zm136 163.5c-7.7 10-70 67-174.5 67S34.2 408.5 9.7 379c-6.8-7.7 1-11.3 5.5-8.3C88.5 415.2 203 488.5 387.7 401c7.5-3.7 13.3 2 5.5 12zm39.8 2.2c-6.5 15.8-16 26.8-21.2 31-5.5 4.5-9.5 2.7-6.5-3.8s19.3-46.5 12.7-55c-6.5-8.3-37-4.3-48-3.2-10.8 1-13 2-14-.3-2.3-5.7 21.7-15.5 37.5-17.5 15.7-1.8 41-.8 46 5.7 3.7 5.1 0 27.1-6.5 43.1z"/></svg></a>
+        <a href="https://www.youtube.com/@TheMartinBoysMusic" target="_blank" title="YouTube">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+        <a href="https://www.pandora.com/artist/the-martin-boys/ARb74Vrr4vrr2VX" target="_blank" title="Pandora">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.882 0v24H8.32a1.085 1.085 0 001.085-1.085v-4.61h1.612c7.88 0 11.103-4.442 11.103-9.636C22.119 2.257 17.247 0 12.662 0H1.882Z"/></svg></a>
+      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="connect" style="background:#000">
+  <div class="section-inner">
+  <div class="section-title">Connect</div>
+  <div class="connect-links">
+    <a href="https://instagram.com/whoisdanbeattie" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>Instagram</a>
+    <a href="https://x.com/whoisdanbeattie" target="_blank"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>X / Twitter</a>
+    <a href="https://www.facebook.com/whoisdanbeattie" target="_blank"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="currentColor"/></svg>Facebook</a>
+    <a href="https://www.tiktok.com/@whoisdanbeattie" target="_blank"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.6 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.27 0 .53.04.78.1V9.06a6.38 6.38 0 0 0-.78-.05A6.34 6.34 0 0 0 3.22 15.3a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.76a8.29 8.29 0 0 0 4.24 1.37V6.82a3.13 3.13 0 0 1-.55-.13z" fill="currentColor"/></svg>TikTok</a>
+    <a href="https://linktr.ee/themartinboys" target="_blank"><svg viewBox="0 0 24 24"><path d="M21 6.5v11c0 .8-.7 1.5-1.5 1.5h-15C3.7 19 3 18.3 3 17.5v-11C3 5.7 3.7 5 4.5 5h15c.8 0 1.5.7 1.5 1.5zM12 15.5l5-5h-3.5V7h-3v3.5H7l5 5z" fill="currentColor"/></svg>The Martin Boys</a>
+  </div>
+</div>
+</div>
+
+<footer>
+  <div class="footer-inner"><p>&copy; 2026 Dan Beattie</p></div>
+</footer>
+
+<script>
+  // Carousel
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.carousel-dot');
+  function showSlide(index) {
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+    currentSlide = index;
+  }
+  function nextSlide() { showSlide((currentSlide + 1) % slides.length); }
+  function prevSlide() { showSlide((currentSlide - 1 + slides.length) % slides.length); }
+  function goToSlide(i) { showSlide(i); }
+
+  setInterval(nextSlide, 5000);
+
+  // Mobile menu
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const ham = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    ham.classList.toggle('active');
+  }
+  window.addEventListener('scroll', () => {
+    const menu = document.getElementById('mobileMenu');
+    const ham = document.getElementById('hamburger');
+    if (menu.classList.contains('open')) {
+      menu.classList.remove('open');
+      ham.classList.remove('active');
+    }
+  });
+
+  // Countdown to September 18, 2026
+  function updateCountdown() {
+    const release = new Date('2026-09-18T00:00:00').getTime();
+    const now = new Date().getTime();
+    const diff = release - now;
+
+    if (diff > 0) {
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
+</body>
+</html>
+/* Custom domain: whoisdanbeattie.com */
