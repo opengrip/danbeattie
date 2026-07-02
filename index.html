@@ -280,8 +280,8 @@
     align-items: center;
   }
   .tour-date { font-size: 15px; font-weight: 600; color: #fff; }
-  .tour-venue { font-size: 15px; font-weight: 400; color: rgba(255,255,255,0.6); }
-  .tour-location { font-size: 13px; color: rgba(255,255,255,0.25); text-align: right; }
+  .tour-venue { font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.55); }
+  .tour-location { font-size: 12px; color: rgba(255,255,255,0.25); }
   .tour-status {
     font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;
     color: #2a6; margin-top: 2px;
@@ -296,17 +296,21 @@
     display: inline-block;
   }
   .tour-tickets:hover { border-color: rgba(255,255,255,0.3); color: #fff; }
+  .tour-item:hover { background: rgba(255,255,255,0.01); }
+  .tour-item { transition: background 0.2s; }
 
   /* === CONNECT === */
   .connect-links { display: flex; gap: 8px; flex-wrap: wrap; }
   .connect-links a {
-    padding: 10px 24px;
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 20px;
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 100px;
     font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.4);
     text-decoration: none; transition: all 0.2s;
   }
   .connect-links a:hover { border-color: rgba(255,255,255,0.25); color: #fff; }
+  .connect-links a svg { width: 16px; height: 16px; fill: currentColor; }
 
   /* === FOOTER === */
   footer {
@@ -335,7 +339,7 @@
 
     .section { padding: 60px 0; }
     .section-inner { padding: 0 24px; }
-    .tour-item { grid-template-columns: 80px 1fr 90px; gap: 8px; padding: 14px 0; }
+    .tour-item { grid-template-columns: 80px 1fr 80px; gap: 6px; padding: 14px 0; }
     .tour-location { font-size: 12px; }
     nav .links { display: none; }
     .hamburger { display: flex; }
@@ -582,11 +586,11 @@
   <div class="section-inner">
   <div class="section-title">Connect</div>
   <div class="connect-links">
-    <a href="https://instagram.com/whoisdanbeattie" target="_blank">Instagram</a>
-    <a href="https://x.com/whoisdanbeattie" target="_blank">X / Twitter</a>
-    <a href="https://www.facebook.com/whoisdanbeattie" target="_blank">Facebook</a>
-    <a href="https://www.tiktok.com/@whoisdanbeattie" target="_blank">TikTok</a>
-    <a href="https://linktr.ee/themartinboys" target="_blank">The Martin Boys</a>
+    <a href="https://instagram.com/whoisdanbeattie" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>Instagram</a>
+    <a href="https://x.com/whoisdanbeattie" target="_blank"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>X / Twitter</a>
+    <a href="https://www.facebook.com/whoisdanbeattie" target="_blank"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="currentColor"/></svg>Facebook</a>
+    <a href="https://www.tiktok.com/@whoisdanbeattie" target="_blank"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.6 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.27 0 .53.04.78.1V9.06a6.38 6.38 0 0 0-.78-.05A6.34 6.34 0 0 0 3.22 15.3a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.76a8.29 8.29 0 0 0 4.24 1.37V6.82a3.13 3.13 0 0 1-.55-.13z" fill="currentColor"/></svg>TikTok</a>
+    <a href="https://linktr.ee/themartinboys" target="_blank"><svg viewBox="0 0 24 24"><path d="M21 6.5v11c0 .8-.7 1.5-1.5 1.5h-15C3.7 19 3 18.3 3 17.5v-11C3 5.7 3.7 5 4.5 5h15c.8 0 1.5.7 1.5 1.5zM12 15.5l5-5h-3.5V7h-3v3.5H7l5 5z" fill="currentColor"/></svg>The Martin Boys</a>
   </div>
 </div>
 </div>
