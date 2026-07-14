@@ -30,10 +30,10 @@ def norm(events):
         for o in e.get("offers", []):
             if o.get("type") == "Tickets" and o.get("url"):
                 tickets = o["url"]; break
-        # repeated title across 3+ events = a tour name, so lead with the city
-        if titles[venue] >= 3:
-            venue, loc = loc, venue
-        out.append({"date": dt, "venue": venue, "location": loc, "tickets": tickets})
+        # strip artist prefix if the event title already contains it
+        if venue.lower().startswith("the martin boys @ "):
+            venue = venue[len("the martin boys @ "):]
+        out.append({"date": dt, "venue": venue, "location": loc, "tickets": tickets, "artist": "The Martin Boys"})
     return out
 
 def fmt_date(iso):
@@ -43,8 +43,8 @@ def fmt_date(iso):
 def render(items):
     rows = []
     for it in items:
-        artist = it.get("artist", "")
-        vname = it["venue"] + (f" — w/ {artist}" if artist else "")
+        artist = it.get("artist", "The Martin Boys")
+        vname = f"{artist} — {it['venue']}"
         t = (f'\n    <a href="{h.escape(it["tickets"])}" class="tour-tickets" target="_blank" rel="noopener">Tickets</a>'
              if it["tickets"] else "\n    ")
         rows.append(f'''  <div class="tour-item" data-date="{it["date"]}">
