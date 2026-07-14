@@ -469,6 +469,23 @@
   }
   .presave-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,255,255,0.15); }
   .tour-date { white-space: nowrap; }
+
+  /* section separation + ambient tones */
+  .section { position: relative; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.05); }
+  .section::before { content: ''; position: absolute; pointer-events: none; z-index: 0; }
+  .section-inner { position: relative; z-index: 1; }
+  .sec-bio { background: #0b0a0d; }
+  .sec-bio::before { top: -220px; right: -160px; width: 640px; height: 640px; background: radial-gradient(circle, rgba(255,140,50,0.08), transparent 65%); }
+  .sec-craft { background: #070708; }
+  .sec-craft::before { bottom: -260px; left: -180px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(140,95,255,0.06), transparent 65%); }
+  .sec-tour { background: #0c0b11; }
+  .sec-tour::before { top: -180px; left: -140px; width: 620px; height: 620px; background: radial-gradient(circle, rgba(160,85,255,0.08), transparent 65%); }
+  .sec-music { background: #0d0a09; }
+  .sec-music::before { top: 20%; left: -220px; width: 720px; height: 720px; background: radial-gradient(circle, rgba(255,105,60,0.09), transparent 65%); }
+  .sec-live { background: #08090c; }
+  .sec-live::before { top: -200px; right: -180px; width: 680px; height: 680px; background: radial-gradient(circle, rgba(75,145,255,0.07), transparent 65%); }
+  .sec-connect { background: #0b0b0f; }
+  .sec-connect::before { bottom: -240px; right: -160px; width: 640px; height: 640px; background: radial-gradient(circle, rgba(255,140,50,0.06), transparent 65%); }
 </style>
 <meta name="description" content="Dan Beattie — Music Director and bassist for The Martin Boys. On tour summer '26.">
 <meta property="og:title" content="Dan Beattie — Music Director &amp; Bassist">
@@ -579,7 +596,7 @@
 </div>
 
 <!-- BIO SECTION -->
-<div class="section" id="bio">
+<div class="section sec-bio" id="bio">
   <div class="section-inner">
     <div class="section-title">Bio</div>
     <div class="bio-wrap">
@@ -600,7 +617,7 @@
 </div>
 
 <!-- WHAT I DO -->
-<div class="section" id="craft" style="background:#000">
+<div class="section sec-craft" id="craft">
   <div class="section-inner">
   <div class="section-title">What I Do</div>
   <div class="craft-grid">
@@ -616,7 +633,7 @@
 </div>
 
 <!-- TOUR SECTION -->
-<div class="section" id="tour" style="background:#000">
+<div class="section sec-tour" id="tour">
   <div class="section-inner">
   <div class="section-title">Tour</div>
   <!-- TOUR LIST START -->
@@ -767,7 +784,7 @@
   <div class="tour-item" data-date="2026-10-17">
     <div><div class="tour-date">Oct. 17, 2026</div></div>
     <div>
-      <div class="tour-venue">STEVE WAYLON — LIVE IN MINTO</div>
+      <div class="tour-venue">STEVE WAYLON — MINTO LEGION</div>
       <div class="tour-location">MINTO, NB</div>
     </div>
     
@@ -777,7 +794,7 @@
 </div>
 
 <!-- MUSIC SECTION -->
-<div class="section music-section" id="music">
+<div class="section music-section sec-music" id="music">
   <div class="section-inner">
   <div class="section-title">Music</div>
         <div class="music-grid">
@@ -831,7 +848,7 @@
 </div>
 
 <!-- LIVE SECTION -->
-<div class="section" id="live" style="background:#000">
+<div class="section sec-live" id="live">
   <div class="section-inner">
   <div class="section-title">Live</div>
   <div class="gallery-cols">
@@ -847,7 +864,7 @@
 </div>
 </div>
 
-<div class="section" id="connect" style="background:#000">
+<div class="section sec-connect" id="connect">
   <div class="section-inner">
   <div class="section-title">Connect</div>
   <p class="connect-sub">Booking, collabs, or talking shop &mdash; DMs are open on every platform, or email direct.</p>
