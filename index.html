@@ -445,6 +445,20 @@
   .gallery-cols a:hover img { transform: scale(1.035); filter: saturate(1.05); }
   @media (max-width: 768px) { .gallery-cols { columns: 2; column-gap: 10px; } .gallery-cols a { margin-bottom: 10px; } }
   @media (prefers-reduced-motion: reduce) { .hero-title { animation: none; } }
+
+  /* what i do */
+  .craft-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .craft-card {
+    border: 1px solid rgba(255,255,255,0.07); border-radius: 4px; padding: 26px 24px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .craft-card:hover { border-color: rgba(255,255,255,0.22); transform: translateY(-3px); }
+  .craft-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: #fff; margin: 0 0 10px; letter-spacing: 0.3px; }
+  .craft-card p { font-size: 13.5px; line-height: 1.65; color: rgba(255,255,255,0.45); margin: 0; }
+  .craft-note { margin-top: 28px; font-size: 14px; color: rgba(255,255,255,0.5); max-width: 640px; }
+  .craft-note a { color: rgba(255,255,255,0.85); text-decoration: underline; text-underline-offset: 3px; }
+  @media (max-width: 900px) { .craft-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .craft-grid { grid-template-columns: 1fr; } }
 </style>
 <meta name="description" content="Dan Beattie — Music Director and bassist for The Martin Boys. On tour summer '26.">
 <meta property="og:title" content="Dan Beattie — Music Director &amp; Bassist">
@@ -490,6 +504,7 @@
 
 <div class="mobile-menu" id="mobileMenu">
   <a href="#bio" onclick="toggleMenu()">Bio</a>
+  <a href="#craft" onclick="toggleMenu()">What I Do</a>
   <a href="#tour" onclick="toggleMenu()">Tour</a>
   <a href="#music" onclick="toggleMenu()">Music</a>
   <a href="#live" onclick="toggleMenu()">Live</a>
@@ -572,6 +587,22 @@
       </div>
     </div>
   </div>
+</div>
+
+<!-- WHAT I DO -->
+<div class="section" id="craft" style="background:#000">
+  <div class="section-inner">
+  <div class="section-title">What I Do</div>
+  <div class="craft-grid">
+    <div class="craft-card"><h3>Live Playback &amp; Show Systems</h3><p>Ableton Live rigs, redundant playback, clicks and guides, AbleSet control. The invisible machinery that makes a modern show run tight, night after night.</p></div>
+    <div class="craft-card"><h3>Music Direction</h3><p>Setlists, arrangements, transitions, and band leadership. Turning a pile of songs into a show with a shape.</p></div>
+    <div class="craft-card"><h3>MIDI &amp; Automation</h3><p>MC8 Pro programming, patch changes, scene switching, hardware integration. One tap on stage and everything moves at once.</p></div>
+    <div class="craft-card"><h3>Live Performance Coaching</h3><p>Stagecraft, pacing, and energy. The difference between playing your songs and commanding a room.</p></div>
+    <div class="craft-card"><h3>Songwriting &amp; Arrangement</h3><p>Co-writes, structures, hooks, and the edits that make a song land live as hard as it does in headphones.</p></div>
+    <div class="craft-card"><h3>Artist Brand &amp; Growth</h3><p>Positioning, socials, and the business behind the music. The stage is half the job; being seen is the other half.</p></div>
+  </div>
+  <p class="craft-note">This isn't a service menu &mdash; it's what twenty years of stages builds. For the right project I take on select consulting. <a href="#connect">Get in touch</a>.</p>
+</div>
 </div>
 
 <!-- TOUR SECTION -->
@@ -777,6 +808,8 @@
     <a href="images/img_4.jpg" target="_blank"><img src="images/img_4.jpg" alt="Dan Beattie live photo" loading="lazy"></a>
   </div>
 </div>
+  <p class="craft-note" style="margin-top:24px;"><a href="https://instagram.com/whoisdanbeattie" target="_blank" rel="noopener">More on Instagram &rarr;</a></p>
+</div>
 </div>
 
 <div class="section" id="connect" style="background:#000">
@@ -890,7 +923,7 @@
   // Scroll-reveal
   (function() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const targets = document.querySelectorAll('.section-title, .bio-text p, .bio-image, .tour-item, .gallery-cols a, .album-art, .music-info, .music-links, .connect-sub, .connect-links a');
+    const targets = document.querySelectorAll('.section-title, .bio-text p, .bio-image, .tour-item, .craft-card, .craft-note, .gallery-cols a, .album-art, .music-info, .music-links, .connect-sub, .connect-links a');
     let i = 0;
     targets.forEach(el => { el.classList.add('reveal'); });
     const obs = new IntersectionObserver(entries => {
