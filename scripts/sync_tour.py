@@ -18,13 +18,18 @@ def load_extras():
         return json.loads(p.read_text(encoding="utf-8"))
     return []
 
+def load_overrides():
+    p = ROOT / "venue_overrides.json"
+    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+
 def norm(events):
+    overrides = load_overrides()
     from collections import Counter
     titles = Counter((e.get("title") or e["venue"]["name"]) for e in events)
     out = []
     for e in events:
         dt = e["datetime"][:10]
-        venue = e.get("title") or e["venue"]["name"]
+        venue = overrides.get(str(e.get("id",""))) or e.get("title") or e["venue"]["name"]
         loc = f'{e["venue"]["city"]}, {e["venue"].get("region") or e["venue"]["country"]}'
         tickets = ""
         for o in e.get("offers", []):
