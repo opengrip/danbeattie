@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dan Beattie</title>
+<title>Dan Beattie — Music Director & Bassist | The Martin Boys</title>
+<link rel="canonical" href="https://whoisdanbeattie.com/">
+<meta name="theme-color" content="#0a0a0c">
+<meta property="og:type" content="profile">
+<link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -370,6 +374,23 @@
 <meta property="og:url" content="https://whoisdanbeattie.com">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="favicon.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Dan Beattie",
+  "jobTitle": "Music Director & Bassist",
+  "url": "https://whoisdanbeattie.com",
+  "image": "https://whoisdanbeattie.com/images/img_5.jpg",
+  "memberOf": {"@type": "MusicGroup", "name": "The Martin Boys", "url": "https://open.spotify.com/artist/0Jjl71AwTHhQlvhSeugY8k"},
+  "sameAs": [
+    "https://instagram.com/whoisdanbeattie",
+    "https://x.com/whoisdanbeattie",
+    "https://www.facebook.com/whoisdanbeattie",
+    "https://www.tiktok.com/@whoisdanbeattie"
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -413,9 +434,9 @@
     </div>
 
     <div class="hero-slides">
-      <div class="hero-slide active" data-index="0"><img src="images/img_5.jpg" alt="Dan Beattie bassist black shirt aviators red bass guitar"></div>
-      <div class="hero-slide" data-index="1"><img src="images/img_6.jpg" alt="Dan Beattie bassist black shirt aviators red bass guitar"></div>
-      <div class="hero-slide" data-index="2"><img src="images/img_2.jpg" alt="Dan Beattie bassist black shirt aviators red bass guitar"></div>
+      <div class="hero-slide active" data-index="0"><img src="images/img_5.jpg" alt="Dan Beattie in aviators and backwards cap with a red five-string bass, studio portrait" fetchpriority="high"></div>
+      <div class="hero-slide" data-index="1"><img src="images/img_6.jpg" alt="Dan Beattie playing bass live on stage in front of The Martin Boys logo" loading="lazy"></div>
+      <div class="hero-slide" data-index="2"><img src="images/img_2.jpg" alt="Dan Beattie mid-set at an outdoor festival, five-string bass raised" loading="lazy"></div>
     </div>
 
     <button class="carousel-btn carousel-prev" onclick="prevSlide()">&#10094;</button>
@@ -461,7 +482,7 @@
         <p>On tour, summer '26.</p>
       </div>
       <div class="bio-image">
-        <img src="images/img_14.jpg" alt="Dan Beattie bassist black shirt aviators red bass guitar">
+        <img src="images/img_14.jpg" alt="Dan Beattie portrait with bass" loading="lazy">
       </div>
     </div>
   </div>
@@ -668,6 +689,9 @@
       document.getElementById('hours').textContent = String(hours).padStart(2, '0');
       document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
       document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    } else {
+      const cd = document.getElementById('countdown');
+      if (cd) cd.innerHTML = '<div class="countdown-item"><div class="countdown-num">OUT NOW</div><div class="countdown-label">Streaming everywhere</div></div>';
     }
   }
   updateCountdown();
@@ -691,10 +715,16 @@
         tagged = true;
       }
     });
+    if (!tagged && items.length) {
+      const last = items[items.length - 1];
+      const empty = document.createElement('div');
+      empty.className = 'tour-item';
+      empty.innerHTML = '<div></div><div><div class="tour-venue">NEW DATES COMING SOON</div><div class="tour-location">FOLLOW ON SOCIALS FOR ANNOUNCEMENTS</div></div>';
+      last.insertAdjacentElement('afterend', empty);
+    }
   })();
 
 </script>
 
 </body>
 </html>
-/* Custom domain: whoisdanbeattie.com */
