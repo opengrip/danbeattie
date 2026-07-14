@@ -366,6 +366,50 @@
     height: 16px;
   }
   .mobile-social { display: none; }
+
+  /* ---- premium pass ---- */
+  html { scroll-behavior: smooth; }
+  ::selection { background: rgba(255,255,255,0.9); color: #000; }
+
+  /* cinematic hero treatment */
+  .hero-slide img { transition: transform 0.5s ease; }
+  .hero-slide.active img { animation: kenburns 9s ease-out forwards; }
+  @keyframes kenburns { from { transform: scale(1.07); } to { transform: scale(1.0); } }
+  .hero-inner::after {
+    content: ''; position: absolute; inset: 0; z-index: 10; pointer-events: none;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 28%, transparent 62%, rgba(0,0,0,0.72) 100%);
+  }
+  .hero-inner::before {
+    content: ''; position: absolute; inset: 0; z-index: 11; pointer-events: none; opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+  }
+
+  /* scroll reveal */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.8s cubic-bezier(.2,.6,.2,1), transform 0.8s cubic-bezier(.2,.6,.2,1); }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* section title accent */
+  .section-title::after { content: ''; display: block; width: 28px; height: 1px; background: rgba(255,255,255,0.3); margin-top: 14px; }
+
+  /* micro-interactions */
+  .tour-item { border-left: 2px solid transparent; padding-left: 0; transition: background 0.25s, border-color 0.25s, padding-left 0.25s; }
+  .tour-item:hover { border-left-color: rgba(255,255,255,0.35); padding-left: 12px; background: rgba(255,255,255,0.02); }
+  .tour-tickets { transition: background 0.25s, color 0.25s, border-color 0.25s; }
+  .tour-tickets:hover { background: #fff; color: #000; border-color: #fff; }
+  .connect-links a { transition: transform 0.25s ease, color 0.25s ease, border-color 0.25s; }
+  .connect-links a:hover { transform: translateY(-3px); color: #fff; }
+  .platform-icons a { transition: transform 0.25s ease, background 0.25s, border-color 0.25s; }
+  .platform-icons a:hover { transform: translateY(-3px); }
+  .countdown-num { font-variant-numeric: tabular-nums; }
+  .connect-sub { font-size: 14px; color: rgba(255,255,255,0.4); margin: -14px 0 28px; max-width: 480px; }
+
+  a:focus-visible { outline: 1px solid rgba(255,255,255,0.6); outline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .hero-slide.active img { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
 </style>
 <meta name="description" content="Dan Beattie — Music Director and bassist for The Martin Boys. On tour summer '26.">
 <meta property="og:title" content="Dan Beattie — Music Director &amp; Bassist">
@@ -625,12 +669,14 @@
 <div class="section" id="connect" style="background:#000">
   <div class="section-inner">
   <div class="section-title">Connect</div>
+  <p class="connect-sub">Booking, collabs, or talking shop &mdash; DMs are open on every platform, or email direct.</p>
   <div class="connect-links">
     <a href="https://instagram.com/whoisdanbeattie" target="_blank"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>Instagram</a>
     <a href="https://x.com/whoisdanbeattie" target="_blank"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>X / Twitter</a>
     <a href="https://www.facebook.com/whoisdanbeattie" target="_blank"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" fill="currentColor"/></svg>Facebook</a>
     <a href="https://www.tiktok.com/@whoisdanbeattie" target="_blank"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.6 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.27 0 .53.04.78.1V9.06a6.38 6.38 0 0 0-.78-.05A6.34 6.34 0 0 0 3.22 15.3a6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V8.76a8.29 8.29 0 0 0 4.24 1.37V6.82a3.13 3.13 0 0 1-.55-.13z" fill="currentColor"/></svg>TikTok</a>
     <a href="https://linktr.ee/themartinboys" target="_blank"><svg viewBox="0 0 24 24"><path d="M21 6.5v11c0 .8-.7 1.5-1.5 1.5h-15C3.7 19 3 18.3 3 17.5v-11C3 5.7 3.7 5 4.5 5h15c.8 0 1.5.7 1.5 1.5zM12 15.5l5-5h-3.5V7h-3v3.5H7l5 5z" fill="currentColor"/></svg>The Martin Boys</a>
+    <a href="mailto:danielbeattieinc@gmail.com"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 2v.51l-8 4.99-8-4.99V6h16zM4 18V8.99l8 5 8-5V18H4z" fill="currentColor"/></svg>Email</a>
   </div>
 </div>
 </div>
@@ -726,5 +772,27 @@
 
 </script>
 
+
+<script>
+  // Scroll-reveal
+  (function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const targets = document.querySelectorAll('.section-title, .bio-text p, .bio-image, .tour-item, .album-art, .music-info, .music-links, .connect-sub, .connect-links a');
+    let i = 0;
+    targets.forEach(el => { el.classList.add('reveal'); });
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const siblings = Array.from(e.target.parentElement.children).filter(c => c.classList.contains('reveal'));
+          const idx = siblings.indexOf(e.target);
+          e.target.style.transitionDelay = Math.min(idx * 70, 350) + 'ms';
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(el => obs.observe(el));
+  })();
+</script>
 </body>
 </html>
