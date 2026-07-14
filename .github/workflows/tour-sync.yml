@@ -1,0 +1,20 @@
+name: Sync tour dates from Bandsintown
+on:
+  schedule:
+    - cron: "17 9 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync tour section
+        run: python3 scripts/sync_tour.py
+      - name: Commit if changed
+        run: |
+          git config user.name "tour-sync-bot"
+          git config user.email "actions@github.com"
+          git add -A
+          git diff --cached --quiet || (git commit -m "Auto-sync tour dates from Bandsintown" && git push)
