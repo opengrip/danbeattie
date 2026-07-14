@@ -11,5 +11,19 @@
     "venue": "Neguac Country Fest",
     "location": "Neguac, NB",
     "tickets": ""
+  },
+  {
+    "date": "2026-08-07",
+    "venue": "Fredrod",
+    "location": "Fredericton, NB",
+    "tickets": "",
+    "artist": "Steve Waylon"
+  },
+  {
+    "date": "2026-10-17",
+    "venue": "Live in Minto",
+    "location": "Minto, NB",
+    "tickets": "",
+    "artist": "Steve Waylon"
   }
 ]
