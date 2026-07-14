@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dan Beattie — Music Director & Bassist | The Martin Boys</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="canonical" href="https://whoisdanbeattie.com/">
 <meta name="theme-color" content="#0a0a0c">
 <meta property="og:type" content="profile">
@@ -410,6 +413,38 @@
     .hero-slide.active img { animation: none; }
     .reveal { opacity: 1; transform: none; transition: none; }
   }
+
+  /* ---- premium pass 2 ---- */
+  .section-title, .tour-venue, .music-info h3, .hero-title h1 { font-family: 'Space Grotesk', -apple-system, sans-serif; }
+
+  .hero-title {
+    position: absolute; left: 104px; bottom: 88px; z-index: 12; pointer-events: none;
+    animation: heroIn 1.1s cubic-bezier(.2,.6,.2,1) 0.35s both;
+  }
+  .hero-title h1 {
+    font-size: clamp(44px, 7.5vw, 104px); font-weight: 700; color: #fff;
+    line-height: 0.95; letter-spacing: -0.02em; margin: 0;
+    text-shadow: 0 2px 30px rgba(0,0,0,0.45);
+  }
+  .hero-title p {
+    margin: 14px 0 0 3px; font-size: 13px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(255,255,255,0.75);
+  }
+  @keyframes heroIn { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 768px) {
+    .hero-title { left: 20px; right: 20px; bottom: 96px; }
+    .hero-title p { letter-spacing: 2px; font-size: 11px; }
+  }
+
+  .gallery-cols { columns: 3; column-gap: 14px; }
+  .gallery-cols a { display: block; margin-bottom: 14px; break-inside: avoid; overflow: hidden; border-radius: 3px; }
+  .gallery-cols img {
+    width: 100%; display: block; filter: saturate(0.92);
+    transition: transform 0.5s cubic-bezier(.2,.6,.2,1), filter 0.5s;
+  }
+  .gallery-cols a:hover img { transform: scale(1.035); filter: saturate(1.05); }
+  @media (max-width: 768px) { .gallery-cols { columns: 2; column-gap: 10px; } .gallery-cols a { margin-bottom: 10px; } }
+  @media (prefers-reduced-motion: reduce) { .hero-title { animation: none; } }
 </style>
 <meta name="description" content="Dan Beattie — Music Director and bassist for The Martin Boys. On tour summer '26.">
 <meta property="og:title" content="Dan Beattie — Music Director &amp; Bassist">
@@ -443,7 +478,7 @@
   <div class="links">
     <a href="#bio">Bio</a>
     <a href="#tour">Tour</a>
-    <a href="#music">Music</a>
+    <a href="#music">Music</a> <a href="#live">Live</a>
     <a href="#connect">Connect</a>
   </div>
   <div class="right">
@@ -466,6 +501,10 @@
 
 <div class="hero">
   <div class="hero-inner">
+    <div class="hero-title">
+      <h1>DAN<br>BEATTIE</h1>
+      <p>Music Director &amp; Bassist &mdash; The Martin Boys</p>
+    </div>
     <div class="hero-sidebar">
       <a href="https://instagram.com/whoisdanbeattie" target="_blank" title="Instagram">
         <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a>
@@ -528,7 +567,7 @@
         <p>On tour, summer '26.</p>
       </div>
       <div class="bio-image">
-        <img src="images/img_14.jpg" alt="Dan Beattie portrait with bass" loading="lazy">
+        <img src="images/img_15_2x.jpg" srcset="images/img_15.jpg 700w, images/img_15_2x.jpg 1400w" sizes="(max-width: 768px) 90vw, 40vw" alt="Dan Beattie studio press portrait" loading="lazy">
       </div>
     </div>
   </div>
@@ -724,6 +763,21 @@
   </div>
 </div>
 
+<!-- LIVE SECTION -->
+<div class="section" id="live" style="background:#000">
+  <div class="section-inner">
+  <div class="section-title">Live</div>
+  <div class="gallery-cols">
+    <a href="images/img_21_2x.jpg" target="_blank"><img src="images/img_21.jpg" alt="Dan Beattie low angle on festival stage, bass raised" loading="lazy"></a>
+    <a href="images/img_2_2x.jpg" target="_blank"><img src="images/img_2.jpg" alt="Dan Beattie mid-set at an outdoor festival" loading="lazy"></a>
+    <a href="images/img_1.jpg" target="_blank"><img src="images/img_1.jpg" alt="Dan Beattie live photo" loading="lazy"></a>
+    <a href="images/img_3.jpg" target="_blank"><img src="images/img_3.jpg" alt="Dan Beattie live photo" loading="lazy"></a>
+    <a href="images/img_14.jpg" target="_blank"><img src="images/img_14.jpg" alt="Dan Beattie with bass" loading="lazy"></a>
+    <a href="images/img_4.jpg" target="_blank"><img src="images/img_4.jpg" alt="Dan Beattie live photo" loading="lazy"></a>
+  </div>
+</div>
+</div>
+
 <div class="section" id="connect" style="background:#000">
   <div class="section-inner">
   <div class="section-title">Connect</div>
@@ -835,7 +889,7 @@
   // Scroll-reveal
   (function() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const targets = document.querySelectorAll('.section-title, .bio-text p, .bio-image, .tour-item, .album-art, .music-info, .music-links, .connect-sub, .connect-links a');
+    const targets = document.querySelectorAll('.section-title, .bio-text p, .bio-image, .tour-item, .gallery-cols a, .album-art, .music-info, .music-links, .connect-sub, .connect-links a');
     let i = 0;
     targets.forEach(el => { el.classList.add('reveal'); });
     const obs = new IntersectionObserver(entries => {
