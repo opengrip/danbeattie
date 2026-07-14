@@ -376,11 +376,11 @@
   .hero-slide.active img { animation: kenburns 9s ease-out forwards; }
   @keyframes kenburns { from { transform: scale(1.07); } to { transform: scale(1.0); } }
   .hero-inner::after {
-    content: ''; position: absolute; inset: 0; z-index: 10; pointer-events: none;
+    content: ''; position: absolute; inset: 0; z-index: 5; pointer-events: none;
     background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 28%, transparent 62%, rgba(0,0,0,0.72) 100%);
   }
   .hero-inner::before {
-    content: ''; position: absolute; inset: 0; z-index: 11; pointer-events: none; opacity: 0.05;
+    content: ''; position: absolute; inset: 0; z-index: 6; pointer-events: none; opacity: 0.05;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
   }
 
@@ -392,7 +392,7 @@
   .section-title::after { content: ''; display: block; width: 28px; height: 1px; background: rgba(255,255,255,0.3); margin-top: 14px; }
 
   /* micro-interactions */
-  .tour-item { border-left: 2px solid transparent; padding-left: 0; transition: background 0.25s, border-color 0.25s, padding-left 0.25s; }
+  .tour-item { border-left: 2px solid transparent; padding-left: 0; transition: background 0.25s, border-color 0.25s, padding-left 0.25s, opacity 0.8s cubic-bezier(.2,.6,.2,1), transform 0.8s cubic-bezier(.2,.6,.2,1); }
   .tour-item:hover { border-left-color: rgba(255,255,255,0.35); padding-left: 12px; background: rgba(255,255,255,0.02); }
   .tour-tickets { transition: background 0.25s, color 0.25s, border-color 0.25s; }
   .tour-tickets:hover { background: #fff; color: #000; border-color: #fff; }
