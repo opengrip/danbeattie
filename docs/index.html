@@ -349,7 +349,7 @@
 
     .section { padding: 60px 0; }
     .section-inner { padding: 0 24px; }
-    .tour-item { grid-template-columns: 80px 1fr 80px; gap: 6px; padding: 14px 0; }
+    .tour-item { grid-template-columns: 104px 1fr 70px; gap: 8px; padding: 14px 0; } .tour-date { font-size: 13px; }
     .tour-location { font-size: 12px; }
     nav .links { display: none; }
     .hamburger { display: flex; }
@@ -459,6 +459,16 @@
   .craft-note a { color: rgba(255,255,255,0.85); text-decoration: underline; text-underline-offset: 3px; }
   @media (max-width: 900px) { .craft-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 560px) { .craft-grid { grid-template-columns: 1fr; } }
+
+  .presave-btn {
+    display: inline-block; margin-top: 26px; padding: 13px 30px;
+    font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: #000; background: #fff; border-radius: 3px; text-decoration: none;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .presave-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,255,255,0.15); }
+  .tour-date { white-space: nowrap; }
 </style>
 <meta name="description" content="Dan Beattie — Music Director and bassist for The Martin Boys. On tour summer '26.">
 <meta property="og:title" content="Dan Beattie — Music Director &amp; Bassist">
@@ -595,8 +605,8 @@
   <div class="section-title">What I Do</div>
   <div class="craft-grid">
     <div class="craft-card"><h3>Live Playback &amp; Show Systems</h3><p>Ableton Live rigs, redundant playback, clicks and guides, AbleSet control. The invisible machinery that makes a modern show run tight, night after night.</p></div>
-    <div class="craft-card"><h3>Music Direction</h3><p>Setlists, arrangements, transitions, and band leadership. Turning a pile of songs into a show with a shape.</p></div>
-    <div class="craft-card"><h3>MIDI &amp; Automation</h3><p>MC8 Pro programming, patch changes, scene switching, hardware integration. One tap on stage and everything moves at once.</p></div>
+    <div class="craft-card"><h3>Music Direction</h3><p>Setlists, arrangements, transitions, and band leadership. Taking songs and turning them into moments.</p></div>
+    <div class="craft-card"><h3>MIDI &amp; Automation</h3><p>Controller programming, patch changes, scene switching, hardware integration. One tap on stage and everything moves at once.</p></div>
     <div class="craft-card"><h3>Live Performance Coaching</h3><p>Stagecraft, pacing, and energy. The difference between playing your songs and commanding a room.</p></div>
     <div class="craft-card"><h3>Songwriting &amp; Arrangement</h3><p>Co-writes, structures, hooks, and the edits that make a song land live as hard as it does in headphones.</p></div>
     <div class="craft-card"><h3>Artist Brand &amp; Growth</h3><p>Positioning, socials, and the business behind the music. The stage is half the job; being seen is the other half.</p></div>
@@ -615,6 +625,14 @@
     <div>
       <div class="tour-venue">BATHURST HOSPITALITY DAYS</div>
       <div class="tour-location">BATHURST, NB</div>
+    </div>
+    
+  </div>
+  <div class="tour-item" data-date="2026-07-18">
+    <div><div class="tour-date">Jul. 18, 2026</div></div>
+    <div>
+      <div class="tour-venue">TOYRUN — W/ STEVE WAYLON</div>
+      <div class="tour-location">MUNIAC, NB</div>
     </div>
     
   </div>
@@ -653,88 +671,88 @@
   <div class="tour-item" data-date="2026-09-23">
     <div><div class="tour-date">Sep. 23, 2026</div></div>
     <div>
-      <div class="tour-venue">CALL YOU A COUNTRY BOY TOUR</div>
-      <div class="tour-location">VANCOUVER, BC</div>
+      <div class="tour-venue">VANCOUVER, BC</div>
+      <div class="tour-location">CALL YOU A COUNTRY BOY TOUR</div>
     </div>
     <a href="https://www.bandsintown.com/t/108622041?app_id=6c96175f419d9630331d545ae437d211&amp;came_from=267&amp;utm_medium=api&amp;utm_source=public_api&amp;utm_campaign=ticket" class="tour-tickets" target="_blank" rel="noopener">Tickets</a>
   </div>
   <div class="tour-item" data-date="2026-09-25">
     <div><div class="tour-date">Sep. 25, 2026</div></div>
     <div>
-      <div class="tour-venue">CALL YOU A COUNTRY BOY TOUR</div>
-      <div class="tour-location">CALGARY, AB</div>
+      <div class="tour-venue">CALGARY, AB</div>
+      <div class="tour-location">CALL YOU A COUNTRY BOY TOUR</div>
     </div>
     <a href="https://www.bandsintown.com/t/108622052?app_id=6c96175f419d9630331d545ae437d211&amp;came_from=267&amp;utm_medium=api&amp;utm_source=public_api&amp;utm_campaign=ticket" class="tour-tickets" target="_blank" rel="noopener">Tickets</a>
   </div>
   <div class="tour-item" data-date="2026-09-26">
     <div><div class="tour-date">Sep. 26, 2026</div></div>
     <div>
-      <div class="tour-venue">CALL YOU A COUNTRY BOY TOUR</div>
-      <div class="tour-location">EDMONTON, AB</div>
+      <div class="tour-venue">EDMONTON, AB</div>
+      <div class="tour-location">CALL YOU A COUNTRY BOY TOUR</div>
     </div>
     <a href="https://www.bandsintown.com/t/108622062?app_id=6c96175f419d9630331d545ae437d211&amp;came_from=267&amp;utm_medium=api&amp;utm_source=public_api&amp;utm_campaign=ticket" class="tour-tickets" target="_blank" rel="noopener">Tickets</a>
   </div>
   <div class="tour-item" data-date="2026-09-28">
     <div><div class="tour-date">Sep. 28, 2026</div></div>
     <div>
-      <div class="tour-venue">CALL YOU A COUNTRY BOY TOUR</div>
-      <div class="tour-location">WINNIPEG, MB</div>
+      <div class="tour-venue">WINNIPEG, MB</div>
+      <div class="tour-location">CALL YOU A COUNTRY BOY TOUR</div>
     </div>
     <a href="https://www.bandsintown.com/t/108622088?app_id=6c96175f419d9630331d545ae437d211&amp;came_from=267&amp;utm_medium=api&amp;utm_source=public_api&amp;utm_campaign=ticket" class="tour-tickets" target="_blank" rel="noopener">Tickets</a>
   </div>
   <div class="tour-item" data-date="2026-09-30">
     <div><div class="tour-date">Sep. 30, 2026</div></div>
     <div>
-      <div class="tour-venue">CALL YOU A COUNTRY BOY TOUR</div>
-      <div class="tour-location">LONDON, ON</div>
+      <div class="tour-venue">LONDON, ON</div>
+      <div class="tour-location">CALL YOU A COUNTRY BOY TOUR</div>
     </div>
     <a href="https://www.bandsintown.com/t/108622098?app_id=6c96175f419d9630331d545ae437d211&amp;came_from=267&amp;utm_medium=api&amp;utm_source=public_api&amp;utm_campaign=ticket" class="tour-tickets" target="_blank" rel="noopener">Tickets</a>
   </div>
   <div class="tour-item" data-date="2026-10-01">
     <div><div class="tour-date">Oct. 1, 2026</div></div>
     <div>
-      <div class="tour-venue">CALL YOU A COUNTRY BOY TOUR</div>
-      <div class="tour-location">TORONTO, ON</div>
+      <div class="tour-venue">TORONTO, ON</div>
+      <div class="tour-location">CALL YOU A COUNTRY BOY TOUR</div>
     </div>
     <a href="https://www.bandsintown.com/t/108622107?app_id=6c96175f419d9630331d545ae437d211&amp;came_from=267&amp;utm_medium=api&amp;utm_source=public_api&amp;utm_campaign=ticket" class="tour-tickets" target="_blank" rel="noopener">Tickets</a>
   </div>
   <div class="tour-item" data-date="2026-10-02">
     <div><div class="tour-date">Oct. 2, 2026</div></div>
     <div>
-      <div class="tour-venue">CALL YOU A COUNTRY BOY TOUR</div>
-      <div class="tour-location">OTTAWA, ON</div>
+      <div class="tour-venue">OTTAWA, ON</div>
+      <div class="tour-location">CALL YOU A COUNTRY BOY TOUR</div>
     </div>
     <a href="https://www.bandsintown.com/t/108622119?app_id=6c96175f419d9630331d545ae437d211&amp;came_from=267&amp;utm_medium=api&amp;utm_source=public_api&amp;utm_campaign=ticket" class="tour-tickets" target="_blank" rel="noopener">Tickets</a>
   </div>
   <div class="tour-item" data-date="2026-10-03">
     <div><div class="tour-date">Oct. 3, 2026</div></div>
     <div>
-      <div class="tour-venue">CALL YOU A COUNTRY BOY TOUR</div>
-      <div class="tour-location">MONTRÉAL, QC</div>
+      <div class="tour-venue">MONTRÉAL, QC</div>
+      <div class="tour-location">CALL YOU A COUNTRY BOY TOUR</div>
     </div>
     <a href="https://www.bandsintown.com/t/108622123?app_id=6c96175f419d9630331d545ae437d211&amp;came_from=267&amp;utm_medium=api&amp;utm_source=public_api&amp;utm_campaign=ticket" class="tour-tickets" target="_blank" rel="noopener">Tickets</a>
   </div>
   <div class="tour-item" data-date="2026-10-08">
     <div><div class="tour-date">Oct. 8, 2026</div></div>
     <div>
-      <div class="tour-venue">CALL YOU A COUNTRY BOY TOUR</div>
-      <div class="tour-location">FREDERICTON, NB</div>
+      <div class="tour-venue">FREDERICTON, NB</div>
+      <div class="tour-location">CALL YOU A COUNTRY BOY TOUR</div>
     </div>
     <a href="https://www.bandsintown.com/t/108622129?app_id=6c96175f419d9630331d545ae437d211&amp;came_from=267&amp;utm_medium=api&amp;utm_source=public_api&amp;utm_campaign=ticket" class="tour-tickets" target="_blank" rel="noopener">Tickets</a>
   </div>
   <div class="tour-item" data-date="2026-10-09">
     <div><div class="tour-date">Oct. 9, 2026</div></div>
     <div>
-      <div class="tour-venue">CALL YOU A COUNTRY BOY TOUR</div>
-      <div class="tour-location">HALIFAX, NS</div>
+      <div class="tour-venue">HALIFAX, NS</div>
+      <div class="tour-location">CALL YOU A COUNTRY BOY TOUR</div>
     </div>
     <a href="https://www.bandsintown.com/t/108622147?app_id=6c96175f419d9630331d545ae437d211&amp;came_from=267&amp;utm_medium=api&amp;utm_source=public_api&amp;utm_campaign=ticket" class="tour-tickets" target="_blank" rel="noopener">Tickets</a>
   </div>
   <div class="tour-item" data-date="2026-10-10">
     <div><div class="tour-date">Oct. 10, 2026</div></div>
     <div>
-      <div class="tour-venue">CALL YOU A COUNTRY BOY TOUR</div>
-      <div class="tour-location">MONCTON, NB</div>
+      <div class="tour-venue">MONCTON, NB</div>
+      <div class="tour-location">CALL YOU A COUNTRY BOY TOUR</div>
     </div>
     <a href="https://www.bandsintown.com/t/108622159?app_id=6c96175f419d9630331d545ae437d211&amp;came_from=267&amp;utm_medium=api&amp;utm_source=public_api&amp;utm_campaign=ticket" class="tour-tickets" target="_blank" rel="noopener">Tickets</a>
   </div>
@@ -773,6 +791,7 @@
               <div class="countdown-label">Sec</div>
             </div>
           </div>
+          <a class="presave-btn" href="https://open.spotify.com/prerelease/30aTSBO2gZPgQMFBvGZ0Eo" target="_blank" rel="noopener">Pre-Save on Spotify</a>
         </div>
         <div class="music-links">
           <p style="font-size:14px;color:rgba(255,255,255,0.35);margin-bottom:16px;">Listen to The Martin Boys everywhere.</p>

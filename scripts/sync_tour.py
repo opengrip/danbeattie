@@ -19,6 +19,8 @@ def load_extras():
     return []
 
 def norm(events):
+    from collections import Counter
+    titles = Counter((e.get("title") or e["venue"]["name"]) for e in events)
     out = []
     for e in events:
         dt = e["datetime"][:10]
@@ -28,6 +30,9 @@ def norm(events):
         for o in e.get("offers", []):
             if o.get("type") == "Tickets" and o.get("url"):
                 tickets = o["url"]; break
+        # repeated title across 3+ events = a tour name, so lead with the city
+        if titles[venue] >= 3:
+            venue, loc = loc, venue
         out.append({"date": dt, "venue": venue, "location": loc, "tickets": tickets})
     return out
 
@@ -38,12 +43,14 @@ def fmt_date(iso):
 def render(items):
     rows = []
     for it in items:
+        artist = it.get("artist", "")
+        vname = it["venue"] + (f" — w/ {artist}" if artist else "")
         t = (f'\n    <a href="{h.escape(it["tickets"])}" class="tour-tickets" target="_blank" rel="noopener">Tickets</a>'
              if it["tickets"] else "\n    ")
         rows.append(f'''  <div class="tour-item" data-date="{it["date"]}">
     <div><div class="tour-date">{fmt_date(it["date"])}</div></div>
     <div>
-      <div class="tour-venue">{h.escape(it["venue"].upper())}</div>
+      <div class="tour-venue">{h.escape(vname.upper())}</div>
       <div class="tour-location">{h.escape(it["location"].upper())}</div>
     </div>{t}
   </div>''')

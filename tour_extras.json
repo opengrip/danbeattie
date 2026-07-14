@@ -1,3 +1,15 @@
 [
-  {"date": "2026-07-25", "venue": "Neguac Country Fest", "location": "Neguac, NB", "tickets": ""}
+  {
+    "date": "2026-07-18",
+    "venue": "Toyrun",
+    "location": "Muniac, NB",
+    "tickets": "",
+    "artist": "Steve Waylon"
+  },
+  {
+    "date": "2026-07-25",
+    "venue": "Neguac Country Fest",
+    "location": "Neguac, NB",
+    "tickets": ""
+  }
 ]
