@@ -404,7 +404,7 @@
   .platform-icons a { transition: transform 0.25s ease, background 0.25s, border-color 0.25s; }
   .platform-icons a:hover { transform: translateY(-3px); }
   .countdown-num { font-variant-numeric: tabular-nums; }
-  .connect-sub { font-size: 14px; color: rgba(255,255,255,0.4); margin: -14px 0 28px; max-width: 480px; }
+  .connect-sub { font-size: 14px; color: rgba(255,255,255,0.4); margin: -14px 0 28px; }
 
   a:focus-visible { outline: 1px solid rgba(255,255,255,0.6); outline-offset: 3px; }
 
@@ -455,7 +455,7 @@
   .craft-card:hover { border-color: rgba(255,255,255,0.22); transform: translateY(-3px); }
   .craft-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: #fff; margin: 0 0 10px; letter-spacing: 0.3px; }
   .craft-card p { font-size: 13.5px; line-height: 1.65; color: rgba(255,255,255,0.45); margin: 0; }
-  .craft-note { margin-top: 28px; font-size: 14px; color: rgba(255,255,255,0.5); max-width: 640px; }
+  .craft-note { margin-top: 28px; font-size: 14px; color: rgba(255,255,255,0.5); }
   .craft-note a { color: rgba(255,255,255,0.85); text-decoration: underline; text-underline-offset: 3px; }
   @media (max-width: 900px) { .craft-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 560px) { .craft-grid { grid-template-columns: 1fr; } }
@@ -486,6 +486,10 @@
   .sec-live::before { top: -200px; right: -180px; width: 680px; height: 680px; background: radial-gradient(circle, rgba(75,145,255,0.07), transparent 65%); }
   .sec-connect { background: #0b0b0f; }
   .sec-connect::before { bottom: -240px; right: -160px; width: 640px; height: 640px; background: radial-gradient(circle, rgba(255,140,50,0.06), transparent 65%); }
+
+  .video-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; max-width: 900px; }
+  .video-row iframe { width: 100%; aspect-ratio: 9/16; border: 0; border-radius: 4px; background: #000; }
+  @media (max-width: 700px) { .video-row { grid-template-columns: 1fr; max-width: 340px; } }
 </style>
 <meta name="description" content="Dan Beattie — Music Director and bassist for The Martin Boys. On tour summer '26.">
 <meta property="og:title" content="Dan Beattie — Music Director &amp; Bassist">
@@ -851,6 +855,11 @@
 <div class="section sec-live" id="live">
   <div class="section-inner">
   <div class="section-title">Live</div>
+  <div class="video-row">
+    <iframe src="https://www.youtube-nocookie.com/embed/xXHmaaqszaU" title="Dan Beattie live clip" loading="lazy" allowfullscreen allow="accelerometer; encrypted-media; picture-in-picture"></iframe>
+    <iframe src="https://www.youtube-nocookie.com/embed/P0f3t8AG6Jw" title="Dan Beattie live clip" loading="lazy" allowfullscreen allow="accelerometer; encrypted-media; picture-in-picture"></iframe>
+    <iframe src="https://www.youtube-nocookie.com/embed/EdK1QDBodeA" title="Dan Beattie live clip" loading="lazy" allowfullscreen allow="accelerometer; encrypted-media; picture-in-picture"></iframe>
+  </div>
   <div class="gallery-cols">
     <a href="images/img_21_2x.jpg" target="_blank"><img src="images/img_21.jpg" alt="Dan Beattie low angle on festival stage, bass raised" loading="lazy"></a>
     <a href="images/img_4.jpg" target="_blank"><img src="images/img_4.jpg" alt="Dan Beattie under blue stage light, mid-song" loading="lazy"></a>
