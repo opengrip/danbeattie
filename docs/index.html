@@ -490,6 +490,21 @@
   .video-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; max-width: 900px; }
   .video-row iframe { width: 100%; aspect-ratio: 9/16; border: 0; border-radius: 4px; background: #000; }
   @media (max-width: 700px) { .video-row { grid-template-columns: 1fr; max-width: 340px; } }
+
+  /* lightbox */
+  .lightbox { position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,0.93); backdrop-filter: blur(6px);
+    display: none; align-items: center; justify-content: center; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 90vw; max-height: 86vh; border-radius: 4px; box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+    animation: lbIn 0.25s ease; }
+  @keyframes lbIn { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: none; } }
+  .lb-close, .lb-prev, .lb-next { position: absolute; background: none; border: none; color: rgba(255,255,255,0.7);
+    cursor: pointer; font-size: 34px; padding: 18px; line-height: 1; transition: color 0.2s; z-index: 301; }
+  .lb-close:hover, .lb-prev:hover, .lb-next:hover { color: #fff; }
+  .lb-close { top: 14px; right: 20px; }
+  .lb-prev { left: 12px; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 12px; top: 50%; transform: translateY(-50%); }
+  @media (max-width: 700px) { .lb-prev { left: 2px; } .lb-next { right: 2px; } .lightbox img { max-width: 96vw; } }
 </style>
 <meta name="description" content="Dan Beattie — Music Director and bassist for The Martin Boys. On tour summer '26.">
 <meta property="og:title" content="Dan Beattie — Music Director &amp; Bassist">
@@ -1000,6 +1015,36 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     targets.forEach(el => obs.observe(el));
   })();
+</script>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Photo viewer">
+  <button class="lb-close" onclick="lbClose()" aria-label="Close">&times;</button>
+  <button class="lb-prev" onclick="lbStep(-1)" aria-label="Previous">&#10094;</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-next" onclick="lbStep(1)" aria-label="Next">&#10095;</button>
+</div>
+<script>
+  // Gallery lightbox
+  const lbLinks = Array.from(document.querySelectorAll('.gallery-cols a'));
+  let lbIndex = 0;
+  const lbEl = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  function lbShow(i) {
+    lbIndex = (i + lbLinks.length) % lbLinks.length;
+    lbImg.src = lbLinks[lbIndex].getAttribute('href');
+    lbImg.alt = lbLinks[lbIndex].querySelector('img')?.alt || '';
+  }
+  function lbOpen(i) { lbShow(i); lbEl.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function lbClose() { lbEl.classList.remove('open'); document.body.style.overflow = ''; }
+  function lbStep(d) { lbShow(lbIndex + d); }
+  lbLinks.forEach((a, i) => a.addEventListener('click', e => { e.preventDefault(); lbOpen(i); }));
+  lbEl.addEventListener('click', e => { if (e.target === lbEl) lbClose(); });
+  document.addEventListener('keydown', e => {
+    if (!lbEl.classList.contains('open')) return;
+    if (e.key === 'Escape') lbClose();
+    if (e.key === 'ArrowLeft') lbStep(-1);
+    if (e.key === 'ArrowRight') lbStep(1);
+  });
 </script>
 </body>
 </html>
