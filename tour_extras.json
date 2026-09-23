@@ -39,5 +39,14 @@
     "location": "Minto, NB",
     "tickets": "",
     "artist": "Steve Waylon"
+  },
+  {
+    "date": "2026-12-10",
+    "venue": "Rio Round-Up — Rio Event Stage",
+    "location": "Las Vegas, NV",
+    "tickets": "https://www.riolasvegas.com/rio-events/rio-round-up-2026",
+    "link_label": "Event info",
+    "artist": "The Martin Boys",
+    "source": "https://www.nfrexperience.com/event/3977"
   }
 ]

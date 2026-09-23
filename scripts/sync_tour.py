@@ -50,7 +50,7 @@ def render(items):
     for it in items:
         artist = it.get("artist", "The Martin Boys")
         vname = f"{artist} — {it['venue']}"
-        t = (f'\n    <a href="{h.escape(it["tickets"])}" class="tour-tickets" target="_blank" rel="noopener">Tickets</a>'
+        t = (f'\n    <a href="{h.escape(it["tickets"])}" class="tour-tickets" target="_blank" rel="noopener">{h.escape(it.get("link_label", "Tickets"))}</a>'
              if it["tickets"] else "\n    ")
         rows.append(f'''  <div class="tour-item" data-date="{it["date"]}">
     <div><div class="tour-date">{fmt_date(it["date"])}</div></div>
