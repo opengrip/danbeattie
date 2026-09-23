@@ -24,6 +24,8 @@ def load_overrides():
 
 def norm(events):
     overrides = load_overrides()
+    fallback_path = ROOT / "ticket_fallbacks.json"
+    ticket_fallbacks = json.loads(fallback_path.read_text(encoding="utf-8")) if fallback_path.exists() else {}
     from collections import Counter
     titles = Counter((e.get("title") or e["venue"]["name"]) for e in events)
     out = []
@@ -35,6 +37,8 @@ def norm(events):
         for o in e.get("offers", []):
             if o.get("type") == "Tickets" and o.get("url"):
                 tickets = o["url"]; break
+        if not tickets:
+            tickets = ticket_fallbacks.get(str(e.get("id", "")), {}).get("url", "")
         # strip artist prefix if the event title already contains it
         if venue.lower().startswith("the martin boys @ "):
             venue = venue[len("the martin boys @ "):]
